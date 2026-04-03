@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Crop Recommendation</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #bcbbbb;
+        }
+
+        h1 {
+            text-align: center;
+            color: black;
+        }
+
+        .card {
+            margin: 20px auto;
+            text-align: center;
+            color: white;
+        }
+
+        .container {
+            background: #fffbfe;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">
+            Crop Recommendation System Using Machine Learning
+        </span>
+    </div>
+</nav>
+
+<!-- Form Container -->
+<div class="container mt-4">
+
+    <h1 class="text-success">Crop Recommendation System</h1>
+
+    <form action="/predict" method="POST">
+
+        <!-- NPK -->
+        <div class="row">
+            <div class="col-md-4">
+                <label for="Nitrogen">Nitrogen</label>
+                <input type="number" class="form-control" id="Nitrogen" name="Nitrogen" placeholder="Enter Nitrogen" required>
+            </div>
+            <div class="col-md-4">
+                <label for="Phosporus">Phosphorus</label>
+                <input type="number" class="form-control" id="Phosporus" name="Phosporus" placeholder="Enter Phosphorus" required>
+            </div>
+            <div class="col-md-4">
+                <label for="Potassium">Potassium</label>
+                <input type="number" class="form-control" id="Potassium" name="Potassium" placeholder="Enter Potassium" required>
+            </div>
+        </div>
+
+        <!-- Temperature, Humidity, pH -->
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <label for="Temperature">Temperature (°C)</label>
+                <input type="number" step="0.01" class="form-control" id="Temperature" name="Temperature" placeholder="Enter Temperature C" required>
+            </div>
+            <div class="col-md-4">
+                <label for="Humidity">Humidity (%)</label>
+                <input type="number" step="0.01" class="form-control" id="Humidity" name="Humidity" placeholder="Enter Humidity" required>
+            </div>
+            <div class="col-md-4">
+                <label for="Ph">pH</label>
+                <input type="number" step="0.01" class="form-control" id="Ph" name="Ph" placeholder="Enter ph" required>
+            </div>
+        </div>
+
+        <!-- Rainfall -->
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <label for="Rainfall">Rainfall (mm)</label>
+                <input type="number" step="0.01" class="form-control" id="Rainfall" name="Rainfall" placeholder="Enter Rainfall" required>
+            </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary btn-lg" >
+                Submit
+            </button>
+        </div>
+
+    </form>
+
+    <!-- Result -->
+    {% if result %}
+    <div class="card bg-dark mt-4" style="width: 18rem;">
+        <img src="{{ url_for('static', filename='crop.png') }} "class="card-img-top" style="width:100px; margin:auto; padding-top:10px;">
+        <div class="card-body">
+            <h5 class="card-title">Recommended Crop:</h5>
+            <p class="card-text">{{ result }}</p>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
